@@ -1,5 +1,3 @@
-
-
 int trigPin = 8;    // TRIG pin
 int echoPin = 7;    // ECHO pin
 
