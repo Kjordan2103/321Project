@@ -1,5 +1,5 @@
 #include <Servo.h>
-//code from arduino docs on making a servo go
+//code from arduino docs on making a servo go - https://docs.arduino.cc/tutorials/generic/basic-servo-control/
 Servo myservo;  // create servo object to control a servo
 // twelve servo objects can be created on most boards
 
