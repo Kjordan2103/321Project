@@ -1,4 +1,5 @@
 How to use our product!
+
 **Setup**
 1. You will want to ideally gather some cardboard boxes to form a rectuangular bin structure. You can use anything here, however we will be poking holes in it so we found
 carboard to be the easiest here. Save some cardboard for future steps. Make it so that there is no lid for now
