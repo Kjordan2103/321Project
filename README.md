@@ -33,4 +33,11 @@ Make sure as you attach the sensors, they are facing towards the inside of the b
 
 **Interaction Details**
 
+**Opening the lid**
+To open the lid, simply wave your hand in front of the ultrasonic sensor. To test how this works, you can run our shouldOpen_demo.ino test script. This test will give you a good idea on the distance threshold that the sensor is using to open the lid but will not open the lid itself. For this test the only other component you will need to have set up is the led bulb.
+If you would like to test the functionality for opening the lid, you can run the simple_servo.ino test script. This will move the servo motor once you run the code. To tinker with the rotation of the motor, you can adjust the conditions of the for loops doing the writing to the servo. Once you verify that both of these parts are working as intended, you should be able to open the lid by waving your hand in front of the ultrasonic sensor. Once you do so, the servo will spin the attached lever upwards, pushing the bins lid open.  
+
+**Detecting when full**
+The interaction for detecting when the bin is full is quite simple. The only component of the project that this interaction depends upon is the IR Infrared Obstacle Avoidance Sensor Module. To test the functionality of this component, you can run the isFull_demo.ino test script. The sensor here works by emitting a laser from the IR emitter bulb (clearer bulb on sensor) and receiving the reflection of the laser with the IR receiver bulb (darker bulb). It measures distance with this functionality by recording the time it took to receive the reflected laser (if an obstacle is in the way, the time to receiving the reflected laser will be much faster and the sensor will be able to say that there is an obstacle in the way). Once you figure out the functionality behind this sensor, you can test it further by running your main project loop and filling up the bin. If the bin reads that it is full when the trash piles up to be on the same level as the sensor, your project is functioning as intended. 
+
 
