@@ -1,0 +1,70 @@
+#include <Servo.h>
+
+int IRpin = -1;
+int trigPin = -1;
+int echoPin = -1;
+int ledPin = -1;
+int servoPin = 9;
+
+float userDistance = 60;
+bool canFull = false;
+const float OPEN_THRESHOLD = 30;
+const int OPEN_TIME = 3000;
+
+Servo myServo;
+
+void setup() {
+  // put your setup code here, to run once:
+  myServo.attach(9);
+}
+
+void loop() {
+  //IF the can isn't full
+  if (!isFull()) {
+    digitalWrite(ledPin, LOW);
+
+    //IF the user is close enough to open the can
+    if (shouldOpen()) {
+
+      openCan();
+
+      if (isFull()) {
+        digitalWrite(ledPin, HIGH);
+        canFull = true;
+      }
+    }
+  }//ELSE the can is full
+  else {
+    digitalWrite(ledPin, HIGH);
+  }
+}
+
+void openCan() {
+    //open the can
+    for(int location = 0; location <= 50; location++) {
+      myServo.write(location);
+      delay(20);
+    }
+    delay(OPEN_TIME);
+    //close the can
+    for(int location = 50; location >= 0; location--) {
+      myServo.write(location);
+      delay(20);
+    }
+}
+
+bool isFull() {
+  return digitalRead(IRpin) == 0;
+}
+
+boolean shouldOpen() {
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  float duration = pulseIn(echoPin, HIGH);
+  float distance = (duration*.0343)/2;
+  return distance < OPEN_THRESHOLD;
+}
