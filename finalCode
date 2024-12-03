@@ -1,12 +1,11 @@
 #include <Servo.h>
 
-int IRpin = -1;
-int trigPin = -1;
-int echoPin = -1;
-int ledPin = -1;
-int servoPin = 9;
+int IRpin = 8;
+int trigPin = 6;
+int echoPin = 5;
+int ledPin = 11;
+int servoPin = 3;
 
-float userDistance = 60;
 bool canFull = false;
 const float OPEN_THRESHOLD = 30;
 const int OPEN_TIME = 3000;
@@ -15,7 +14,12 @@ Servo myServo;
 
 void setup() {
   // put your setup code here, to run once:
-  myServo.attach(9);
+  myServo.attach(servoPin);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+  pinMode(IRPin, INPUT);
+  Serial.begin(9600);
 }
 
 void loop() {
@@ -25,18 +29,14 @@ void loop() {
 
     //IF the user is close enough to open the can
     if (shouldOpen()) {
-
       openCan();
-
-      if (isFull()) {
-        digitalWrite(ledPin, HIGH);
-        canFull = true;
-      }
     }
   }//ELSE the can is full
   else {
     digitalWrite(ledPin, HIGH);
   }
+
+  delay(100);
 }
 
 void openCan() {
@@ -66,5 +66,8 @@ boolean shouldOpen() {
 
   float duration = pulseIn(echoPin, HIGH);
   float distance = (duration*.0343)/2;
-  return distance < OPEN_THRESHOLD;
+
+  Serial.print(distance);
+  Serial.print("\n");
+  return distance < OPEN_THRESHOLD ;
 }
